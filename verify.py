@@ -23,6 +23,6 @@ with open("{}_cleaned.csv".format(file_name),'w') as w:
         for line in f:
             if not re.match(r'^\s*$', line):
                 if line.startswith(('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')):
-                    w.write("\n{}".format(line.rstrip().replace("\"","").replace("”","").replace("\'","").replace("’","")))
+                    w.write("\n{}".format(line.rstrip().replace('\r','')))
                 else:
-                    w.write(line.rstrip().replace("\"","").replace("”","").replace("\'","").replace("’",""))
+                    w.write(line.rstrip().replace('\r',''))

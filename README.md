@@ -33,6 +33,12 @@ Para la ejecucion de este proyecto se deben seguir los siguientes pasos
       En este punto debemos realizar un cleaning de la data, ya que esta viene con ciertos saltos de linea y caracteres especiales que no queremos que entren en el criterio de clustering.
       Para este ejecutamos desde linea de comando los siguiente
 
-      $ python verify.py <mounting-point>
+      $ python verify.py
 
-      Este script realiza la limpieza respectiva de todos los archivos descomprimirdos y los monta en el directorio HDFS que se le pasa como parametro
+      Este script realiza la limpieza respectiva de todos los archivos descomprimirdos.
+
+### 2.4 Montarlos al HDFS
+
+Una vez limpio los archivos procedemos a montarlos al HDFS
+
+      $ hdfs -put articles*.csv <hdfs_folder>

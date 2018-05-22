@@ -4,6 +4,7 @@
 #\#,id,title,publication,author,date,year,month,url,content
 
 import re
+import os
 
 file_name = 'articles'
 for i in range(1,4):
@@ -28,9 +29,7 @@ for i in range(1,4):
                         w.write("\n{}".format(line.rstrip().replace('\r','')))
                     else:
                         w.write(line.rstrip().replace('\r',''))
-                    #to_wr = re.compile("\,\d{4}\-\d{2}\-\d{2}\,\d{4}\.\d\,\d+\.\d\,\"?(https?://www\.\w+\.\w+(\/[\w\d\-\.]+)+\/?)?\"?\,").split(temp)
-                    #to_wr = re.split(r'\,\d{4}\-\d{2}\-\d{2}\,\d{4}\.\d\,\d+\.\d\,\"?(https?://www\.\w+\.\w+(\/[\w\d\-\.]+)+\/?)?\"?\,',temp)
-                    #print(to_wr) if len(to_wr) == 1 else "hola"
+    print("Creating a filtered file {}{}".format(file_name,i))
     with open("{}{}_cleaned.csv".format(file_name,i)) as f:
         with open("{}{}_filtered.csv".format(file_name,i),'w') as w:
             cont = 0
@@ -38,3 +37,5 @@ for i in range(1,4):
                 to_wr = re.split(r'\,(\d{4}[\-\/]\d{1,2}[\-\/]\d{1,2}|nan)?\,(\d{4}\.\d|nan)?\,(\d+\.\d|nan)?\,\s*\"?\s*(https?://(\w+\.)?\w+\.\w+(\/[\w\d\-\.\=\?\&\+\(\)\%\s\#]+)+\/?)*\s*\"?\s*\,',line)
                 ready = ",".join(to_wr[0::len(to_wr)-1]) if len(to_wr) > 1 else to_wr[0]
                 w.write(ready)
+    print("Removing temporal file")
+    os.remove("{}{}_cleaned.csv".format(file_name,i))

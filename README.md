@@ -41,4 +41,4 @@ Este script realiza la limpieza respectiva de todos los archivos descomprimirdos
 
 Una vez limpio los archivos procedemos a montarlos al HDFS
 
-      $ hdfs -put articles*.csv <hdfs_folder>
+      $ hdfs -put articles*_*.csv <hdfs_folder>

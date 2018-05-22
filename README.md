@@ -20,7 +20,7 @@ Para la ejecucion de este proyecto se deben seguir los siguientes pasos
 
 ### 2.2. Envio de archivos
 
-      Una vez descargados procedemos a enviarlos a traves de consola a la maquina donde se hara el procesamiento, en nuestro caso la proporcionada por el facilitador del curso
+Una vez descargados procedemos a enviarlos a traves de consola a la maquina donde se hara el procesamiento, en nuestro caso la proporcionada por el facilitador del curso
 
       $ scp all-the-news.zip <user>@<machine_ip>:~
 
@@ -30,12 +30,12 @@ Para la ejecucion de este proyecto se deben seguir los siguientes pasos
 
 ### 2.3. Limpieza
 
-      En este punto debemos realizar un cleaning de la data, ya que esta viene con ciertos saltos de linea y caracteres especiales que no queremos que entren en el criterio de clustering.
-      Para este ejecutamos desde linea de comando los siguiente
+En este punto debemos realizar un cleaning de la data, ya que esta viene con ciertos saltos de linea y caracteres especiales que no queremos que entren en el criterio de clustering.
+Para este ejecutamos desde linea de comando los siguiente
 
       $ python verify.py
 
-      Este script realiza la limpieza respectiva de todos los archivos descomprimirdos.
+Este script realiza la limpieza respectiva de todos los archivos descomprimirdos.
 
 ### 2.4 Montarlos al HDFS
 

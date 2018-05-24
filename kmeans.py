@@ -39,7 +39,7 @@ def kmeans(params):
         rescaledData = idfModel.transform(featurizedData)
         rescaledData.show()
         # Train KMeans
-        kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
+        #kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
     except Exception as e:
         print(str(e),file=sys.stderr)
         sys.exit(1)

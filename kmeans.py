@@ -32,14 +32,14 @@ def kmeans(params):
 
         # Getting the frecuency term vector to try to get k and train kmeans
         featurizedData = hashingTF.transform(removed)
-        featurizedData.show()
+        #featurizedData.show()
 
-        # idf = IDF(inputCol="rawFeatures",outputCol="Vector",minDocFreq=5)
-        # idfModel = idf.fit(featurizedData)
-        # rescaledData = idfModel.transform(featurizedData)
-        #
-        # # Train KMeans
-        # kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
+        idf = IDF(inputCol="rawFeatures",outputCol="features",minDocFreq=5)
+        idfModel = idf.fit(featurizedData)
+        rescaledData = idfModel.transform(featurizedData)
+        rescaledData.show()
+        # Train KMeans
+        kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
     except Exception as e:
         print(str(e),file=sys.stderr)
         sys.exit(1)

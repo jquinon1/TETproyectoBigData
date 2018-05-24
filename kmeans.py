@@ -3,7 +3,6 @@ from pyspark.ml.feature import HashingTF, IDF, Tokenizer, CountVectorizer
 from pyspark.ml.feature import StopWordsRemover
 from pyspark.ml.clustering import KMeans
 from pyspark.sql import SparkSession
-from pyspark import SparkContext
 
 def kmeans(params):
     path = params[0]
@@ -11,13 +10,24 @@ def kmeans(params):
     iterations = int(params[2])
     target_dir = params[3]
 
-    # Creating session
     try:
+        # Creating session
         spark_session = SparkSession.builder.appName("project4-jwj").getOrCreate()
 
+        # loading the files from hdfs ang getting a DataFrame
         data = spark_session.read.format("csv").option("header","true").load("{}/*.csv".format(path))
-        data.show()
+        #data.show()
 
+        # Breaking the content column into individual words
+        tokenizer = Tokenizer(inputCol="content",outputCol="Words")
+        tokenized = tokenizer.transform(data)
+        tokenized.show()
+        # Removing stop words
+        remover = StopWordsRemover(inputCol="Words",outputCol="Filtered")
+        removed = remover.transform(tokenized)
+        removed.show()
+
+        
     except Exception as e:
         print(str(e),file=sys.stderr)
         sys.exit(1)

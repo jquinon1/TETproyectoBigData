@@ -12,10 +12,15 @@ def kmeans(params):
     target_dir = params[3]
 
     # Creating session
-    spark_session = SparkSession.builder.appName("project4-jwj").getOrCreate()
+    try:
+        spark_session = SparkSession.builder.appName("project4-jwj").getOrCreate()
 
-    data = spark_session.read.csv("{}/*.csv".format(path))
-    type(data)
+        data = spark_session.read.csv("{}/*.csv".format(path))
+        type(data)
+    except Exception as e:
+        print(e.message)
+        sys.exit(1) 
+
 
 
 
@@ -25,6 +30,6 @@ def kmeans(params):
 if __name__ == "__main__":
     if len(sys.argv) < 4: # verify number of params
         print("Uso: spark-submit {} <hdfs_input_directory> <k> <iterations> <hdfs_output_directory>".format(sys.argv[0]))
-        print("hdfs folder must be i absolute path example hdfs:///user/jquinon1/datasets/proyecto")
+        print("hdfs folder must be i absolute path example hdfs:///user/jquinon1/datasets/project")
         sys.exit(1)
     kmeans(sys.argv[1:])

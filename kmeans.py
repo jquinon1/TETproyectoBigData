@@ -19,7 +19,7 @@ def kmeans(params):
         print(type(data))
 
     except Exception as e:
-        print(e.getMessage())
+        print(str(e))
         sys.exit(1)
 
 

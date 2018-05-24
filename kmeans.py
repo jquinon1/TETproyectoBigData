@@ -44,8 +44,12 @@ def kmeans(params):
         idfModel = idf.fit(featurizedData)
         rescaledData = idfModel.transform(featurizedData)
         #rescaledData.show()
+        ## GET OPTIMAL K
         # Train KMeans
         kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
+
+        clustersTable = kmean.transform(rescaledData)
+        clustersTable.show()
     except Exception as e:
         print(str(e),file=sys.stderr)
         sys.exit(1)

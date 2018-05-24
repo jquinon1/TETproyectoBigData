@@ -21,13 +21,25 @@ def kmeans(params):
         # Breaking the content column into individual words
         tokenizer = Tokenizer(inputCol="content",outputCol="Words")
         tokenized = tokenizer.transform(data)
-        tokenized.show()
+        #tokenized.show()
         # Removing stop words
         remover = StopWordsRemover(inputCol="Words",outputCol="Filtered")
         removed = remover.transform(tokenized)
-        removed.show()
+        #removed.show()
 
-        
+        # Term frecuency - inverse document frecuency
+        hashingTF = HashingTF(inputCol="Filtered",outputCol="rawFeatures",numFeatures=200000)
+
+        # Getting the frecuency term vector to try to get k and train kmeans
+        featurizedData = hashingTF.transform(removed)
+        featurizedData.show()
+
+        # idf = IDF(inputCol="rawFeatures",outputCol="Vector",minDocFreq=5)
+        # idfModel = idf.fit(featurizedData)
+        # rescaledData = idfModel.transform(featurizedData)
+        #
+        # # Train KMeans
+        # kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
     except Exception as e:
         print(str(e),file=sys.stderr)
         sys.exit(1)

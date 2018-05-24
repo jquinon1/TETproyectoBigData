@@ -16,7 +16,7 @@ def kmeans(params):
         spark_session = SparkSession.builder.appName("project4-jwj").getOrCreate()
 
         data = spark_session.read.csv("{}/*.csv".format(path))
-        print(type(data))
+        data.show()
 
     except Exception as e:
         print(str(e),file=sys.stderr)

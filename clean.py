@@ -34,7 +34,7 @@ for i in range(1,4):
         with open("{}{}_filtered.csv".format(file_name,i),'w') as w:
             cont = 0
             for line in f:
-                to_wr = re.split(r'\,(\d{4}[\-\/]\d{1,2}[\-\/]\d{1,2}|nan)?\,(\d{4}\.\d|nan)?\,(\d+\.\d|nan)?\,\s*\"?\s*(https?://(\w+\.)?\w+\.\w+(\/[\w\d\-\.\=\?\&\+\(\)\%\s\#]+)+\/?)*\s*\"?\s*\,',line)
+                to_wr = re.split(r'\,(\d{4}[\-\/]\d{1,2}[\-\/]\d{1,2}|nan|date)?\,(\d{4}\.\d|nan|year)?\,(\d+\.\d|nan|month)?\,\s*\"?\s*(url|https?://(\w+\.)?\w+\.\w+(\/[\w\d\-\.\=\?\&\+\(\)\%\s\#]+)+\/?)*\s*\"?\s*\,',line)
                 ready = ",".join(to_wr[0::len(to_wr)-1]) if len(to_wr) > 1 else to_wr[0]
                 w.write(ready)
     print("Removing temporal file")

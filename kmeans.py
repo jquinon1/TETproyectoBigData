@@ -53,6 +53,6 @@ def kmeans(params):
 if __name__ == "__main__":
     if len(sys.argv) < 4: # verify number of params
         print("Uso: spark-submit {} <hdfs_input_directory> <k> <iterations> <hdfs_output_directory>".format(sys.argv[0]),file=sys.stderr)
-        print("hdfs folder must be i absolute path example hdfs:///user/jquinon1/datasets/project",file=sys.stderr)
+        print("                     :   hdfs folder must be i absolute path example hdfs:///user/jquinon1/datasets/project",file=sys.stderr)
         sys.exit(1)
     kmeans(sys.argv[1:])

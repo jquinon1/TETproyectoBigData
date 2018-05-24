@@ -2,6 +2,7 @@ import sys
 from pyspark.ml.feature import HashingTF, IDF, Tokenizer, CountVectorizer
 from pyspark.ml.feature import StopWordsRemover
 from pyspark.ml.clustering import KMeans
+from pyspark.sql.functions import col
 from pyspark.sql import SparkSession
 
 def kmeans(params):
@@ -17,6 +18,11 @@ def kmeans(params):
         # loading the files from hdfs ang getting a DataFrame
         data = spark_session.read.format("csv").option("header","true").load("{}/*.csv".format(path))
         #data.show()
+        # Getting column's name
+        columns = data.columns
+        # Removing null rows
+        for i in columns:
+            data = data.filter(col(i). isNotNull())
 
         # Breaking the content column into individual words
         tokenizer = Tokenizer(inputCol="content",outputCol="Words")
@@ -37,9 +43,9 @@ def kmeans(params):
         idf = IDF(inputCol="rawFeatures",outputCol="features",minDocFreq=5)
         idfModel = idf.fit(featurizedData)
         rescaledData = idfModel.transform(featurizedData)
-        rescaledData.show()
+        #rescaledData.show()
         # Train KMeans
-        #kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
+        kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
     except Exception as e:
         print(str(e),file=sys.stderr)
         sys.exit(1)

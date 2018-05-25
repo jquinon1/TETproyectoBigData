@@ -1,5 +1,8 @@
 #  Proyecto 04 - ST0263 - Clústering de documentos a partir de métricas de similitud basado en Big Data
 
+Proyecto basado en:
+      https://github.com/jestra52/st0263-proyecto4
+
 Integrantes del grupo:
 
 * Juan Pablo Londoño Botina - jlondo96@eafit.edu.co

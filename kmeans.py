@@ -46,9 +46,9 @@ def kmeans(params):
         rescaledData = idfModel.transform(featurizedData)
         rescaledData.show()
         ## GET OPTIMAL K
-                rows = rescaledData.select("features").collect()
-        vectors = [rows[i].features.toArray() for i in range(0,len(rows))]
-        newK = getK(vectors)
+        # rows = rescaledData.select("features").collect()
+        # vectors = [rows[i].features.toArray() for i in range(0,len(rows))]
+        # newK = getK(vectors)
 
         # Train KMeans
         kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)

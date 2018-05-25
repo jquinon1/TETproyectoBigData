@@ -52,7 +52,7 @@ def kmeans(params):
         print("HEREEEEE 222222222222222222222222!",file=sys.stderr)
         print(len(vectors))
         newK = getK(vectors)
-        print("HEREEEEE 333333333333333333333!"print("HEREEEEE!",file=sys.stderr))
+        print("HEREEEEE 333333333333333333333!",file=sys.stderr)
         print(newK)
         # Train KMeans
         # kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)

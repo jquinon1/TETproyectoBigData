@@ -47,6 +47,22 @@ Una vez limpio los archivos procedemos a montarlos al HDFS
 
       $ spark-submit  --master yarn --deploy-mode cluster --executor-memory <memoriaGB>G --num-executors <numExecutors> kmeans.py <hdfs_input_directory> <k> <iterations> <hdfs_output_directory>
 
+### 2.6. Obtener resultados
+
+Una vez ejecutado el script debe obtener los resultados para esto
+
+      $ hdfs dfs -get <hdfs_output_directory>/*.csv
+
+Y lo renombramos para facilidad
+
+      $ mv part*.csv result.csv
+
+ !!! IMPORTANTE COLOCAR ESE NOMBRE
+
+ Ahora para finalizar ejecutamos el script plot.py que nos devolvera k imagenes y k archivos, las imagenes conteneran palabras claves del topico de las noticias pertenecientes al cluster, y los archivos, el titulo de las noticias pertenecientes al cluster
+
+      $ python plot.py
+
 ## 3. Algoritmos utilizados:
 
 * HashingTF: HashingTF es un Transformer que toma conjuntos de términos y los convierte en vectores de características de longitud fija. En el procesamiento de texto, un "conjunto de términos" puede ser una bolsa de palabras. HashingTF utiliza el truco de hash. Una característica sin formato se mapea en un índice (término) aplicando una función hash. La función hash utilizada aquí es MurmurHash 3.
@@ -60,6 +76,9 @@ Una vez limpio los archivos procedemos a montarlos al HDFS
 * Python (>= 3.6.2)
 * Pyspark
 * Hadoop (>= 2.7.3.2.6.1.0-129)
+* Numpy
+* PIL
+* WordCloud
 
 ## 5. Referencias:
 

@@ -49,6 +49,7 @@ def kmeans(params):
         rows = rescaledData.select("features").collect()
         vectors = [rows[i].features.values for i in range(0,len(rows))]
         newK = getK(vectors)
+        print("HEREEEEE!")
         print(newK)
         # Train KMeans
         # kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)

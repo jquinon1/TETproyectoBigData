@@ -48,6 +48,8 @@ def kmeans(params):
         ## GET OPTIMAL K
         rows = rescaledData.select("features").collect()
         vectors = [rows[i].features.toArray() for i in range(0,len(rows))]
+        print("HEREEEEE!")
+        print(len(vectors))
         newK = getK(vectors)
         print("HEREEEEE!")
         print(newK)

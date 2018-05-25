@@ -46,20 +46,15 @@ def kmeans(params):
         rescaledData = idfModel.transform(featurizedData)
         rescaledData.show()
         ## GET OPTIMAL K
-        print("HEREEEEE 111111111111111111111!",file=sys.stderr)
-        rows = rescaledData.select("features").collect()
+                rows = rescaledData.select("features").collect()
         vectors = [rows[i].features.toArray() for i in range(0,len(rows))]
-        print("HEREEEEE 222222222222222222222222!",file=sys.stderr)
-        print(len(vectors))
         newK = getK(vectors)
-        print("HEREEEEE 333333333333333333333!",file=sys.stderr)
-        print(newK)
+
         # Train KMeans
-        # kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
-        #
-        # clustersTable = kmean.transform(rescaledData)
-        # clustersTable.show()
-        # clustersTable.select("title","prediction").repartition(1).write.format("com.databricks.spark.csv").option("header", "true").save(target_dir);
+        kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
+        clustersTable = kmean.transform(rescaledData)
+        clustersTable.show()
+        clustersTable.select("title","prediction").repartition(1).write.format("com.databricks.spark.csv").option("header", "true").save(target_dir);
     except Exception as e:
         print(str(e),file=sys.stderr)
         sys.exit(1)

@@ -28,7 +28,7 @@ def getK(vectors):
 
 
     # k means determine k
-    distortions = 10000000000000000
+    distortions = 1000000
     k = 2
     temp = 0
     while True:

@@ -33,7 +33,7 @@ Una vez descargados procedemos a enviarlos a traves de consola a la maquina dond
 En este punto debemos realizar un cleaning de la data, ya que esta viene con ciertos saltos de linea y caracteres especiales que no queremos que entren en el criterio de clustering.
 Para este ejecutamos desde linea de comando los siguiente
 
-      $ python verify.py
+      $ python clean.py
 
 Este script realiza la limpieza respectiva de todos los archivos descomprimirdos.
 

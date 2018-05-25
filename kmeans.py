@@ -1,10 +1,9 @@
 import sys
 from pyspark.ml.feature import HashingTF, IDF, Tokenizer, CountVectorizer
 from pyspark.ml.feature import StopWordsRemover
-from pyspark.ml.clustering import KMeans
+from pyspark.ml.clustering import KMeans,BisectingKMeans,BisectingKMeansModel
 from pyspark.sql.functions import col
 from pyspark.sql import SparkSession
-from optimize import getK
 
 def kmeans(params):
     path = params[0]
@@ -35,7 +34,7 @@ def kmeans(params):
         #removed.show()
 
         # Term frecuency - inverse document frecuency
-        hashingTF = HashingTF(inputCol="Filtered",outputCol="rawFeatures",numFeatures=200000)
+        hashingTF = HashingTF(inputCol="Filtered",outputCol="rawFeatures",numFeatures=3000)
 
         # Getting the frecuency term vector to try to get k and train kmeans
         featurizedData = hashingTF.transform(removed)
@@ -45,11 +44,6 @@ def kmeans(params):
         idfModel = idf.fit(featurizedData)
         rescaledData = idfModel.transform(featurizedData)
         rescaledData.show()
-        ## GET OPTIMAL K
-        # rows = rescaledData.select("features").collect()
-        # vectors = [rows[i].features.toArray() for i in range(0,len(rows))]
-        # newK = getK(vectors)
-
         # Train KMeans
         kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
         clustersTable = kmean.transform(rescaledData)

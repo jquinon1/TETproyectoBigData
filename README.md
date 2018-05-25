@@ -46,6 +46,10 @@ Una vez limpio los archivos procedemos a montarlos al HDFS
 ### 2.5. Ejecutar
 
       $ spark-submit  --master yarn --deploy-mode cluster --executor-memory <memoriaGB>G --num-executors <numExecutors> kmeans.py <hdfs_input_directory> <k> <iterations> <hdfs_output_directory>
+      
+O para hacerlo de manera local
+      
+      $ spark-submit --executor-memory <memoriaGB>G kmeans.py <hdfs_input_directory> <k> <iterations> <hdfs_output_directory>
 
 ### 2.6. Obtener resultados
 

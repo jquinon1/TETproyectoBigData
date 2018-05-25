@@ -59,11 +59,6 @@ def kmeans(params):
         print(str(e),file=sys.stderr)
         sys.exit(1)
 
-
-
-
-
-
 # Execution
 if __name__ == "__main__":
     if len(sys.argv) < 4: # verify number of params

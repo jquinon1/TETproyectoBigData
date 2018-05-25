@@ -37,8 +37,34 @@ Para este ejecutamos desde linea de comando los siguiente
 
 Este script realiza la limpieza respectiva de todos los archivos descomprimirdos.
 
-### 2.4 Montarlos al HDFS
+### 2.4. Montarlos al HDFS
 
 Una vez limpio los archivos procedemos a montarlos al HDFS
 
       $ hdfs -put articles*_*.csv <hdfs_folder>
+
+### 2.5. Ejecutar
+
+      $ spark-submit  --master yarn --deploy-mode cluster --executor-memory <memoriaGB>G --num-executors <numExecutors> kmeans.py <hdfs_input_directory> <k> <iterations> <hdfs_output_directory>
+
+## 3. Algoritmos utilizados:
+
+* HashingTF: HashingTF es un Transformer que toma conjuntos de términos y los convierte en vectores de características de longitud fija. En el procesamiento de texto, un "conjunto de términos" puede ser una bolsa de palabras. HashingTF utiliza el truco de hash. Una característica sin formato se mapea en un índice (término) aplicando una función hash. La función hash utilizada aquí es MurmurHash 3.
+* TF-IDF (Term frequency-inverse document frequency): Tf-idf (del inglés Term frequency – Inverse document frequency), frecuencia de término – frecuencia inversa de documento (o sea, la frecuencia de ocurrencia del término en la colección de documentos), es una medida numérica que expresa cuán relevante es una palabra para un documento en una colección. Esta medida se utiliza a menudo como un factor de ponderación en la recuperación de información y la minería de texto. El valor tf-idf aumenta proporcionalmente al número de veces que una palabra aparece en el documento, pero es compensada por la frecuencia de la palabra en la colección de documentos, lo que permite manejar el hecho de que algunas palabras son generalmente más comunes que otras.
+* K-means: Algoritmo de agrupamiento, se requiere un numero de clusters a generar y una matriz que contiene la frencuencia de terminos obtenida de un conjunto de datos.
+
+## 4. Requisitos:
+
+* Cluster con Spark (>= 2.1.1.2.6.1.0-129)
+* Java Development Kit (>= 1.8.0_144)
+* Python (>= 3.6.2)
+* Pyspark
+* Hadoop (>= 2.7.3.2.6.1.0-129)
+
+## 5. Referencias:
+
+* "Clustering with K-Means with Spark and MLlib"                                      - http://timothyfox.net/?p=15
+* "TF-IDF, HashingTF and CountVectorizer"                                             - https://mingchen0919.github.io/learning-apache-spark/tf-idf.html
+* "TF-IDF with Spark for the Kaggle popcorn competition"                              - https://github.com/logicalguess/tf-idf-spark-and-python
+* "Feature Extraction and Transformation - RDD-based API - Spark 2.2.0 Documentation" - https://spark.apache.org/docs/2.2.0/mllib-feature-extraction.html
+* "Extracting, transforming and selecting features"                                   - https://spark.apache.org/docs/2.3.0/ml-features.html

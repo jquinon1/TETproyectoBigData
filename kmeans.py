@@ -1,7 +1,7 @@
 import sys
-from pyspark.ml.feature import HashingTF, IDF, Tokenizer, CountVectorizer
+from pyspark.ml.feature import HashingTF, IDF, Tokenizer
 from pyspark.ml.feature import StopWordsRemover
-from pyspark.ml.clustering import KMeans,BisectingKMeans,BisectingKMeansModel
+from pyspark.ml.clustering import KMeans
 from pyspark.sql.functions import col
 from pyspark.sql import SparkSession
 

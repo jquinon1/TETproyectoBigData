@@ -22,8 +22,8 @@ def getK(vectors):
     #
     # #create new plot and data
     # plt.plot()
-    print(len(vectors[0]))
-    print(len(vectors))
+    print(len(vectors[0]),file=sys.stderr)
+    print(len(vectors),file=sys.stderr)
     X = np.array(list(zip(vectors))).reshape(len(vectors[0]), len(vectors))
 
 

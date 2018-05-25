@@ -54,7 +54,7 @@ def kmeans(params):
         kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
         clustersTable = kmean.transform(rescaledData)
         clustersTable.show()
-        clustersTable.select("title","prediction").repartition(1).write.format("com.databricks.spark.csv").option("header", "true").save(target_dir);
+        clustersTable.select("title","features","prediction").repartition(1).write.format("com.databricks.spark.csv").option("header", "true").save(target_dir);
     except Exception as e:
         print(str(e),file=sys.stderr)
         sys.exit(1)

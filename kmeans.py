@@ -4,6 +4,7 @@ from pyspark.ml.feature import StopWordsRemover
 from pyspark.ml.clustering import KMeans
 from pyspark.sql.functions import col
 from pyspark.sql import SparkSession
+from optimize import getK
 
 def kmeans(params):
     path = params[0]
@@ -45,12 +46,16 @@ def kmeans(params):
         rescaledData = idfModel.transform(featurizedData)
         #rescaledData.show()
         ## GET OPTIMAL K
+        rows = rescaledData.select("features").collect()
+        vectors = [rows[i].features.values for i in range(0,len(rows))]
+        newK = getK(vectors)
+        print(newK)
         # Train KMeans
-        kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
-
-        clustersTable = kmean.transform(rescaledData)
-        clustersTable.show()
-        clustersTable.select("title","prediction").repartition(1).write.format("com.databricks.spark.csv").option("header", "true").save(target_dir);
+        # kmean = KMeans().setK(k).setMaxIter(iterations).fit(rescaledData)
+        #
+        # clustersTable = kmean.transform(rescaledData)
+        # clustersTable.show()
+        # clustersTable.select("title","prediction").repartition(1).write.format("com.databricks.spark.csv").option("header", "true").save(target_dir);
     except Exception as e:
         print(str(e),file=sys.stderr)
         sys.exit(1)
